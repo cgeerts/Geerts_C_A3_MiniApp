@@ -1,0 +1,15 @@
+.user-section {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.user { 
+    // flex: 1;
+    @include addPadding(10px);
+
+    .user-Name, .user-Description { margin: 0; }
+
+    img { max-width: 100%; }
+
+}
+
