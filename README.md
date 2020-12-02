@@ -1,7 +1,8 @@
 # Geerts_C_A3_MiniApp
 
 This project demonstrates the usage of a database using<br>
-Vue to present the data dynamically.
+Vue to present the data dynamically. In this case the data<br>
+shows Mini Coopers and their details with fetch requests.
 
 ## Roadmap
 
