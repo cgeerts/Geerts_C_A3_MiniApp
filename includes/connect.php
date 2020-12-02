@@ -1,7 +1,7 @@
 <?php 
     $db_dsn = array( 
         'host' => 'localhost',
-        'dbname' => 'profdata',
+        'dbname' => 'db_miniapp',
         'charset' => 'utf8'
     );
 

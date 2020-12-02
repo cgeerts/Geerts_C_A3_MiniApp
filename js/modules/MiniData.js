@@ -6,28 +6,32 @@ export default {
     // data needs to be a function insde a component
     data: function() {
         return {
-            myName: this.prof.name,
-            myRole: this.prof.role,
-            program: "IDP"
+            miniModel: this.mini.Model,
+            miniType: this.mini.Type,
+            hidden: false,
         }
     },
 
-
-    template: `<li>
-                    <img :src="'images/' + prof.avatar" :alt='prof.name + " image"'>
-                    <p>Prof Name: {{ prof.name }}</p>
+    template: `<li :class="{'mini-hidden':hidden}">
+                    <img :src="'images/' + mini.Image" :alt='mini.Model + " image"'>
+                    <p>{{ mini.Type }} - {{ mini.Model }}</p>
                     
-                    <a href="" class="remove-prof">Show {{prof.name}}'s info</a>
-                    <a href="" class="remove-prof">Remove {{prof.name}}</a>
-                    </li>`,
+                    <a href="#" class="remove-mini" @click.prevent="$emit('show-mini', mini.ID)">Show {{mini.Type}}'s info</a>
+                    <a href="#" class="remove-mini" @click.prevent="hideMini()">Remove {{mini.Type}}</a>
+                </li>`,
 
     created: function() {
-        console.log(`created ${this.prof.name}'s card`);
+        console.log(`created ${this.mini.Type}'s card`);
     },
 
     methods: {
         logClicked() {
-            console.log(`fired from inside ${this.prof.name}'s component`);
-        }
+            console.log(`fired from inside ${this.mini.Type}'s component`);
+        },
+
+        hideMini() {
+            console.log(`hideMini`);
+            this.hidden=true;
+        }, 
     }
 }

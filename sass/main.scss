@@ -1,7 +1,13 @@
-@import "components/_profsection";
+@import "components/_minisection";
+@import 'components/_mediaqueries.scss';
+@import 'components/_vars.scss';
 
-.prof-button-modifier { text-decoration: none; }
+// mixins go here
+@import 'components/_mixins.scss';
 
-.bio-data { display: none; }
-
-.show-bio { display: block !important; }
+// main rules go here
+@import 'components/_main.scss';
+@import 'components/_nav.scss';
+@import 'components/_footer.scss';
+@import 'components/_lightbox.scss';
+@import 'components/errorContainer';

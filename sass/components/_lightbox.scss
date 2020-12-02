@@ -9,10 +9,16 @@
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(3px);
 }
 
 .lightbox-con-disabled {
     display: none;
     pointer-events: none;
+}
+
+.mini-info {
+    background-color: white;
+    padding: 3em;
+    border-radius: 1em;
 }

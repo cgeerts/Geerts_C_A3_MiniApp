@@ -1,5 +1,6 @@
 import { fetchData } from "./modules/DataMiner.js";
-import ProfCard from "./modules/TheProfCard.js";
+import MiniData from "./modules/MiniData.js";
+import Lightbox from "./modules/Lightbox.js";
     
         (() => {
         
@@ -24,12 +25,15 @@ import ProfCard from "./modules/TheProfCard.js";
                 //el: "#app",
         
                 data: {
-                    message: "Hello from Vue!",
-                    anotherMessage: "more text, so simple! much winning",
+                    message: "MINI Canada",
+                    anotherMessage: "The Lineup",
                     removeAformat: true,
                     showBioData: false,
-                    professors: [],
-                    currentProfData: {}
+                    cars: [],
+                    currentMiniData: {},
+                    showLightbox: true,
+                    errorMessage: '',
+                    errorMessageNotDisplayed: true,
                 },
         
                 // this is the "mounted" lifecycle hook. Vue is done creating itself, and has attached itself to the "app" div on the page
@@ -38,9 +42,13 @@ import ProfCard from "./modules/TheProfCard.js";
                     
                     fetchData("./includes/index.php")
                         .then(data => {
-                            data.forEach(prof => this.professors.push(prof));
+                            data.forEach(mini => this.cars.push(mini));
                         })
-                        .catch(err => console.error(err));            
+                        .catch((err) => {
+                            console.error(err);
+                            this.errorMessage = err;
+                            this.errorMessageNotDisplayed = false;
+                        });            
                 },
         
                 // run a method when we change our view (update the DOM with Vue)
@@ -56,53 +64,40 @@ import ProfCard from "./modules/TheProfCard.js";
                     clickHeader() {
                         console.log("clicked on the header");
                     },
-                
-                    // renderThumbnails(thumbs) {
-                    //     let userSection = document.querySelector('.user-section'),
-                    //         userTemplate = document.querySelector('#user-template').content;
-                
-                    //     removeChildNodes(userSection);
-                
-                    //     for (let user in thumbs) {
-                    //         let currentUser = userTemplate.cloneNode(true),
-                    //             currentUserText = currentUser.querySelector('.user').children;
-                
-                    //         currentUserText[1].src = `images/${thumbs[user].Image}`;
-                    //         currentUserText[1].id = thumbs[user].Image;
-                    //         currentUserText[2].textContent = thumbs[user].Name;
-                    //         currentUserText[3].textContent = thumbs[user].Description;
-                    //         // add this new user to the view
-                    //         userSection.appendChild(currentUser);
-                            
-                    //     }
-                    //         userSection.addEventListener("click", lightboxEvent);
-                    // },
                     
-                    showProfData(target) {
+                    showMiniData(mini) {
                         // remove this prof from the professors array
-                        console.log('clicked to view prof bio data', target, target.name);
-                        // the "this" keyword inside a vue instance REFERS to the Vue instance itself by default
+                        // console.log('clicked to view mini bio data', target, target.Model);
+                        // // the "this" keyword inside a vue instance REFERS to the Vue instance itself by default
         
-                        // toggle the property between true and false using a ternary statement
-                        this.showBioData = this.showBioData ? false : true;
+                        // // toggle the property between true and false using a ternary statement
+                        // this.showBioData = this.showBioData ? false : true;
         
-                        // make the selected prof's data visible
-                        this.currentProfData = target;
+                        // // make the selected mini cooper data visible
+                        // this.currentMiniData = target;
+
+                        if (mini !== 0) {
+                            
+                            fetchData(`./includes/index.php?id=${mini}`)
+                                .then(data => {
+                                    // data.forEach(mini => this.cars.push(mini));
+                                    this.currentMiniData = data[0];
+                                })
+                                .catch((err) => {
+                                    console.error(err);
+                                    this.errorMessage = err;
+                                    this.errorMessageDisplayed = false;
+                                });
+                        }
+                        
+                        console.log(`minidata fired: ${mini}`);
+                        this.showLightbox = this.showLightbox ? false : true;
                     },            
-        
-                    removeProf(target) {
-                        // remove this prof from the professors array
-                        console.log('clicked to remove prof', target, target.name);
-                        // the "this" keyword inside a vue instance REFERS to the Vue instance itself by default
-        
-                        // make the selected prof's data visible
-                        // this.professors.splice(this.professors.indexOf(target), 1);
-                        this.$delete(this.professors, target);
-                    }
                 },
         
                 components: {
-                    "prof-card": ProfCard
+                    "mini-data": MiniData,
+                    "lightbox": Lightbox
                 }
             }).$mount("#app"); // also connects Vue to your wrapper in HTML
         })();

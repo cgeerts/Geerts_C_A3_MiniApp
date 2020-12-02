@@ -1,11 +1,11 @@
 <?php
     // include the file we just wrote - connect
-     // like a JS import statement
+    // like a JS import statement
 
     $result = array();
 
     function getAllUsers($conn) {
-        $query = "SELECT * FROM profs";
+        $query = "SELECT * FROM tbl_cars";
 
         $runQuery = $conn->query($query);
 
@@ -18,7 +18,7 @@
     }
 
     function getSingleUser($conn, $id) {
-        $query = "SELECT * FROM profs WHERE id=" . $id . "";
+        $query = "SELECT * FROM tbl_cars WHERE id=" . $id . "";
 
         $runQuery = $conn->query($query);
 
