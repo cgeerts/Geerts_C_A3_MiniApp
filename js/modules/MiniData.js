@@ -16,8 +16,8 @@ export default {
                     <img :src="'images/' + mini.Image" :alt='mini.Model + " image"'>
                     <p>{{ mini.Type }} - {{ mini.Model }}</p>
                     
-                    <a href="#" class="remove-mini" @click.prevent="$emit('show-mini', mini.ID)">Show {{mini.Type}}'s info</a>
-                    <a href="#" class="remove-mini" @click.prevent="hideMini()">Remove {{mini.Type}}</a>
+                    <a href="#" class="remove-mini" @click.prevent="$emit('show-mini', mini.ID)">View Details</a>
+                    <a href="#" class="remove-mini" @click.prevent="hideMini()">Remove Car</a>
                 </li>`,
 
     created: function() {
